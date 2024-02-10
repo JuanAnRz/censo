@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100sc;
+    background-color: rgb(91, 195, 91);
+    /*background-image: url(./Fondo.png);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+*/
+}
+#cuadrado{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    min-height: 50px;
+    max-width: 400px;
+    min-width: 50px;
+    width:-moz-fit-content;
+    width: fit-content;
+    justify-content: space-between;
+}
+#boton{
+    border: 0;
+    width: 100%;
+    margin: 10px;
+    height: 40px;
+    color: white;
+    background-color: #0078d4;
+}
+input{
+    background-color: white;
+    height: 40px;
+    border-color: rgb(0, 0, 0);
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    margin: 20px;
+    margin-top: 0;
+    width: 100%;
+}
+#bienvenida{
+    margin: 20px;
+    text-align: center;
+    width: 100%;
+}
+.titulos{
+    width: 100%;
+    font-size: medium;
+    margin: 20px;
+}
+
+.main{
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
