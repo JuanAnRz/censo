@@ -6,7 +6,7 @@ let allValue;
 let sim=0;
 let old =1;
 let young=0;
-
+let divDatos= document.createElement('div');
 function rest(){
     allValue--;
 }
@@ -60,7 +60,7 @@ function people(){
 
         allValue--;
         btn6.addEventListener('click', function(){
-                                        
+            
             let nomValue= nombre.value.toLowerCase();
             let edadValue= parseInt(edad.value);
             let traValue= trabaja.value.toLowerCase();
@@ -71,7 +71,49 @@ function people(){
             datos.className='boton';
             mayor();
             cu.innerHTML='';
+            Swal.fire({
+                    title: 'Guardando Datos',
+                    timer: 600,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    color:'#0000000',  
+                    width:'25em',
+                    })
             cu3.appendChild(datos);
+            datos.addEventListener('click', function(){
+                cu3.innerHTML=('');
+                divDatos.className='datos';
+                let pearsons= document.createElement('h2');
+                pearsons.innerText=('Personas');
+                let ages=document.createElement('h2');
+                ages.innerText=('Edades');
+                let work=document.createElement('h2');
+                work.innerText=('¿Trabajan?');
+                let divTitulos=document.createElement('div');
+
+                divTitulos.appendChild(pearsons);
+                divTitulos.appendChild(ages);
+                divTitulos.appendChild(work);
+
+                divDatos.appendChild(divTitulos);
+
+                for (let index = 0; index < personas.length; index++) {
+                let div= document.createElement('div');
+                div.className='datos'+[index];
+                let peopleTd= document.createElement('p');
+                peopleTd.innerText=(personas[index].nombre);
+                let agesTd= document.createElement('p');
+                agesTd.innerText=(personas[index].edad);
+                let workTd= document.createElement('p');
+                workTd.innerText=(personas[index].trabaja);
+                div.appendChild(peopleTd);
+                div.appendChild(agesTd);
+                div.appendChild(workTd);
+                divDatos.appendChild(div);
+                 }
+                cu3.appendChild(divDatos);
+                
+            })
             people();
         })
                                         
@@ -134,17 +176,67 @@ let txtmenor=document.createElement('p');
 txtmenor.innerText='La edad ingresada es valida';
 txtmenor.className='titulos rojo';
 
+let CiStorage = localStorage.getItem('CI');
+
+let datos=document.createElement('button');
+datos.innerText=('Ver Datos');
+datos.className='boton';
+
 btn.addEventListener('click', function(){
     let userValue = user.value.toLowerCase();
     let ageValue = parseInt(age.value);
-    let CiValue = parseInt(CI.value);
+    let CiValue = (CI.value);
     console.log(userValue);
     console.log(ageValue);
     console.log(CiValue);
     
     cuadrado.innerHTML=('');
-    
+   
+    //Si la persona ya lo hizo(por cedula)
+    if(CiValue===CiStorage){
 
+        cu3.appendChild(datos);
+       
+        datos.addEventListener('click', function(){
+            cu3.innerHTML=('');
+            divDatos.className='datos';
+            let pearsons= document.createElement('h2');
+            pearsons.innerText=('Personas');
+            let ages=document.createElement('h2');
+            ages.innerText=('Edades');
+            let work=document.createElement('h2');
+            work.innerText=('¿Trabajan?');
+            let divTitulos=document.createElement('div');
+            
+
+            divTitulos.appendChild(pearsons);
+            divTitulos.appendChild(ages);
+            divTitulos.appendChild(work);
+
+            divDatos.appendChild(divTitulos);
+
+            let perStotage=JSON.parse(localStorage.getItem('personas'));
+            console.log(perStotage);
+            for (let index = 0; index < perStotage.length; index++) {
+            let div= document.createElement('div');
+            div.className='datos'[index];
+            let peopleTd= document.createElement('p');
+            peopleTd.innerText=(perStotage[index].nombre);
+            let agesTd= document.createElement('p');
+            agesTd.innerText=(perStotage[index].edad);
+            let workTd= document.createElement('p');
+            workTd.innerText=(perStotage[index].trabaja);
+            div.appendChild(peopleTd);
+            div.appendChild(agesTd);
+            div.appendChild(workTd);
+            divDatos.appendChild(div);
+             }
+            cu3.appendChild(divDatos);
+        })
+
+    }else{
+    
+        //Si la persona no lo hizo
         let txtjob= document.createElement('p');
         txtjob.innerText='¿Usted trabaja?';
         txtjob.className='titulos';
@@ -241,25 +333,10 @@ btn.addEventListener('click', function(){
                                         people();
                                         
                                     all=sim;
-                                    const divTable= document.createElement('div');
                                     
-                                    let pearsons= document.createElement('h2');
-                                    pearsons.innerText=('Personas');
-                                    let ages=document.createElement('h2');
-                                    ages.innerText=('Edades');
-                                    let work=document.createElement('h2');
-                                    work.innerText=('¿Trabajan?');
-                                    
-                                    
-                                    let datos=document.createElement('button');
-                                    datos.innerText=('Ver Datos');
-                                    datos.className='boton';
-                                    
-                                    
-                                    
-                                    for (let index = 0; index < personas.length; index++) {
-                                        let divDatos= document.createElement('div');
-                                        divDatos.className='datos';
+                                    datos.addEventListener('click', function(){
+                                        cu3.innerHTML=('');
+                                        for (let index = 0; index < personas.length; index++) {
                                         let peopleTd= document.createElement('p');
                                         peopleTd.innerText=(personas[index].nombre);
                                         let agesTd= document.createElement('p');
@@ -269,10 +346,7 @@ btn.addEventListener('click', function(){
                                         divDatos.appendChild(peopleTd);
                                         divDatos.appendChild(agesTd);
                                         divDatos.appendChild(workTd);
-                                    }
-                                    datos.addEventListener('click', function(){
-                                        cu3.innerHTML=('');
-                                        
+                                         }
                                         cu3.appendChild(divDatos);
                                     })
                                 
@@ -300,96 +374,5 @@ btn.addEventListener('click', function(){
 
             })
         })
-    
+    }
 })
-/*//Inicio del censo
-
-let job=prompt('¿Usted trabaja?').toLowerCase();--------------------------------------------------------------------------------------
-const usuario= new Persona(user, age, job);-------------------------------------------------------------------------------------------
-personas.push(usuario);---------------------------------------------------------------------------------------------------------------
-nombres.push(user);-------------------------------------------------------------------------------------------------------------------
-
-//Switch
-let resp =prompt(`Hola ${user}, ¿Quieres empezar con el censo?`).toLowerCase();-------------------------------------------------------
-switch (resp){------------------------------------------------------------------------------------------------------------------------
-
-//En caso de querer hacer el censo
-case 'si':----------------------------------------------------------------------------------------------------------------------------
-alert(`Comencemos`);
-    
-//Preguntas
-let dept= prompt(`¿En que departamento vive?`);---------------------------------------------------------------------------------------
-let local= prompt(`¿En que localidad vive?`);-----------------------------------------------------------------------------------------
-all= Number(prompt(`${user} ¿Cuántas personas viven en su casa? (Sin ser usted)`));---------------------------------------------------
-sim=0;--------------------------------------------------------------------------------------------------------------------------------
-
-//Nombres (No quedan guardados)
-
-if(all>=1){----------------------------------------------------------------------------------------------------------------------------
-    while(all>0){----------------------------------------------------------------------------------------------------------------------
-        nombre=prompt("Ingrese el nombre de una persona");-----------------------------------------------------------------------------
-        edad=Number(prompt("Ingrese la edad de la persona"));-------------------------------------------------------------------------
-        trabaja=prompt("¿La persona trabaja?");----------------------------------------------------------------------------------------
-        nombre=nombre.toLowerCase();---------------------------------------------------------------------------------------------------
-        trabaja=trabaja.toLowerCase();-------------------------------------------------------------------------------------------------
-        const persona= new Persona(nombre, edad, trabaja);-----------------------------------------------------------------------------
-        personas.push(persona);--------------------------------------------------------------------------------------------------------
-        nombres.push(nombre);----------------------------------------------------------------------------------------------------------
-        rest();------------------------------------------------------------------------------------------------------------------------
-        sum();-------------------------------------------------------------------------------------------------------------------------
-        mayor();-----------------------------------------------------------------------------------------------------------------------
-    }----------------------------------------------------------------------------------------------------------------------------------
-}--------------------------------------------------------------------------------------------------------------------------------------
-console.log(personas);--------------------------------------------------------------------
-all=sim;--------------------------------------------------------------------
-let stringsNombres= nombres.join(' , ');--------------------------------------------------------------------
-let trabajan= personas.filter(personas => personas.trabaja==='si');--------------------------------------------------------------------
-let todasEdades= personas.map(persona => persona.edad);--------------------------------------------------------------------------------
-let stringsEdades= todasEdades.join(', ');--------------------------------------------------------------------------------
-//Muestra de datos guardados--------------------------------------------------------------------------------
-
-alert(`Tu eres ${user}`);
-alert(`Tu tienes ${age} años de edad`);
-alert(`Vives en el departamento de ${dept}`);
-alert(`En la localidad de ${local}`);
-if(all>0){
-    alert(`En el hogar viven ${stringsNombres} además de usted `);
-    console.log(stringsNombres);
-}else{
-    alert(`Y usted vive solo`);
-}
-
-alert(`Las edades ingresadas son: ${stringsEdades}`);
-
-if (trabajan.length>1){
-    alert(`En el hogar trabajan ${trabajan.length}`);
-}else if(trabajan===1){
-    alert(`En el hogar trabaja una sola persona`);
-}else{
-    alert(`En el hogar nadie trabaja`);
-}
-
-if (young>0){
-    alert(`En el hogar viven ${young} menores de edad`);
-    alert(`Y viven ${old} mayores de edad`);
-}else{
-    alert(`En el hogar no viven menores de edad`);
-    alert(`Y viven ${old} mayores`);
-}
-let ask=prompt('¿Quieres ver la informacion sobre alguien?').toLowerCase();
-while(ask==='si'){
-    let quien=prompt('¿De quien?').toLowerCase();
-    let posicion= nombres.indexOf(quien);
-    let info= personas[posicion];
-    alert(`La persona se llama ${info.nombre}, tiene ${info.edad} y ${info.trabaja} trabaja`);
-    ask=prompt('¿Quieres ver la informacion sobre alguien?').toLowerCase();
-}
-alert('Gracias por realizar nuestro censo');
-break;
-
-//En el caso de no querer hacer el censo
-default:
-alert(`Puede cerrar la pagina, no se le haran preguntas`);
-break;
-}
-*/

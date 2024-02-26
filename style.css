@@ -6,12 +6,6 @@
 body{
     height: 100sc;
     background-color: rgb(91, 195, 91);
-    /*background-image: url(./Fondo.png);
-    background-size: 100% 100%;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-}
-*/
 }
 #cuadrado{
     display: flex;
@@ -52,9 +46,21 @@ body{
     width: fit-content;
     justify-content: space-between;
 }
+.datos{
+    width: 100%;
+}
+.datos > div{
+    display: flex;
+    width: 100%;
+}
+.datos > div > p{
+    text-align: center;
+    width: 60%;
+    margin: 10px;
+}
 .boton{
     border: 0;
-    width: 100%;
+    width: 400px;
     margin: 10px;
     height: 40px;
     color: white;
@@ -91,4 +97,17 @@ h2{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.swal2-popup{
+    padding: 20px;
+    border-top:15px;
+    border-radius: 10px;
+    border-color: rgba(0, 0, 255, 0.635);
+    background-color: #85c1e9;
+} 
+.swal2-title{
+    padding: 0;
+    font-size:small;
+    font-family:'Times New Roman', Times, serif;
 }
